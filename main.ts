@@ -3,15 +3,15 @@ pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
 let game_started = false
 let P1Cheated = false
 let P2Cheated = false
-let P1W = false
-let P2W = false
+let P1Won = false
+let P2Won = false
 function main() {
     
     P1Cheated = false
     P2Cheated = false
     game_started = false
-    P1W = false
-    P2W = false
+    P1Won = false
+    P2Won = false
     basic.clearScreen()
     basic.pause(randint(30, 100) * 100)
     if (P1Cheated && P2Cheated) {
@@ -32,8 +32,8 @@ control.inBackground(main)
 input.onPinPressed(TouchPin.P1, function PressedP1() {
     
     if (game_started) {
-        if (P2W == false) {
-            P1W = true
+        if (P2Won == false) {
+            P1Won = true
             basic.showNumber(1, 0)
             new_game()
         }
@@ -46,8 +46,8 @@ input.onPinPressed(TouchPin.P1, function PressedP1() {
 input.onPinPressed(TouchPin.P2, function PressedP2() {
     
     if (game_started) {
-        if (P1W == false) {
-            P2W = true
+        if (P1Won == false) {
+            P2Won = true
             basic.showNumber(2, 0)
             new_game()
         }

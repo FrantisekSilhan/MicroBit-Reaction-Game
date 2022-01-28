@@ -4,15 +4,15 @@ pins.touch_set_mode(TouchTarget.P2, TouchTargetMode.CAPACITIVE)
 game_started = False
 P1Cheated = False
 P2Cheated = False
-P1W = False
-P2W = False
+P1Won = False
+P2Won = False
 def main():
-    global game_started, P1Cheated, P2Cheated, P1W, P2W
+    global game_started, P1Cheated, P2Cheated, P1Won, P2Won
     P1Cheated = False
     P2Cheated = False
     game_started = False
-    P1W = False
-    P2W = False
+    P1Won = False
+    P2Won = False
     basic.clear_screen()
     basic.pause(randint(30, 100) * 100)
     if P1Cheated and P2Cheated:
@@ -28,10 +28,10 @@ def main():
 control.in_background(main)
 
 def PressedP1():
-    global game_started, P1Cheated, P1W, P2W
+    global game_started, P1Cheated, P1Won, P2Won
     if game_started:
-        if P2W == False:
-            P1W = True
+        if P2Won == False:
+            P1Won = True
             basic.show_number(1, 0)
             new_game()
     else:
@@ -39,10 +39,10 @@ def PressedP1():
 input.on_pin_pressed(TouchPin.P1, PressedP1)
 
 def PressedP2():
-    global game_started, P2Cheated, P1W, P2W
+    global game_started, P2Cheated, P1Won, P2Won
     if game_started:
-        if P1W == False:
-            P2W = True
+        if P1Won == False:
+            P2Won = True
             basic.show_number(2, 0)
             new_game()
     else:
