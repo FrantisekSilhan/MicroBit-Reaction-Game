@@ -28,6 +28,7 @@ control.inBackground(main)
 input.onPinPressed(TouchPin.P1, function PressedP1() {
     
     if (game_started) {
+        // dodělat remízu a lock
         basic.showNumber(1, 0)
         new_game()
     } else {
@@ -38,6 +39,7 @@ input.onPinPressed(TouchPin.P1, function PressedP1() {
 input.onPinPressed(TouchPin.P2, function PressedP2() {
     
     if (game_started) {
+        // dodělat remízu a lock
         basic.showNumber(2, 0)
         new_game()
     } else {

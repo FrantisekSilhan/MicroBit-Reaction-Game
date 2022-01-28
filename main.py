@@ -26,6 +26,7 @@ control.in_background(main)
 def PressedP1():
     global game_started, P1Cheated, P2Cheated
     if game_started:
+        #dodělat remízu a lock
         basic.show_number(1, 0)
         new_game()
     else:
@@ -35,6 +36,7 @@ input.on_pin_pressed(TouchPin.P1, PressedP1)
 def PressedP2():
     global game_started, P1Cheated, P2Cheated
     if game_started:
+        #dodělat remízu a lock
         basic.show_number(2, 0)
         new_game()
     else:
