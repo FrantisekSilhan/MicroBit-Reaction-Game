@@ -3,14 +3,17 @@ pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
 let game_started = false
 let P1Cheated = false
 let P2Cheated = false
+let P1W = false
+let P2W = false
 function main() {
     
     P1Cheated = false
     P2Cheated = false
     game_started = false
+    P1W = false
+    P2W = false
     basic.clearScreen()
     basic.pause(randint(30, 100) * 100)
-    game_started = true
     if (P1Cheated && P2Cheated) {
         show("C")
     } else if (P1Cheated) {
@@ -18,6 +21,7 @@ function main() {
     } else if (P2Cheated) {
         show("A")
     } else {
+        game_started = true
         basic.showIcon(IconNames.Yes, 0)
         music.playTone(Note.C, 1500)
     }
@@ -28,9 +32,12 @@ control.inBackground(main)
 input.onPinPressed(TouchPin.P1, function PressedP1() {
     
     if (game_started) {
-        // dodělat remízu a lock
-        basic.showNumber(1, 0)
-        new_game()
+        if (P2W == false) {
+            P1W = true
+            basic.showNumber(1, 0)
+            new_game()
+        }
+        
     } else {
         P1Cheated = true
     }
@@ -39,9 +46,12 @@ input.onPinPressed(TouchPin.P1, function PressedP1() {
 input.onPinPressed(TouchPin.P2, function PressedP2() {
     
     if (game_started) {
-        // dodělat remízu a lock
-        basic.showNumber(2, 0)
-        new_game()
+        if (P1W == false) {
+            P2W = true
+            basic.showNumber(2, 0)
+            new_game()
+        }
+        
     } else {
         P2Cheated = true
     }

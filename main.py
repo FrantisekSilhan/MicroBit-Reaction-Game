@@ -4,14 +4,17 @@ pins.touch_set_mode(TouchTarget.P2, TouchTargetMode.CAPACITIVE)
 game_started = False
 P1Cheated = False
 P2Cheated = False
+P1W = False
+P2W = False
 def main():
-    global game_started, P1Cheated, P2Cheated
+    global game_started, P1Cheated, P2Cheated, P1W, P2W
     P1Cheated = False
     P2Cheated = False
     game_started = False
+    P1W = False
+    P2W = False
     basic.clear_screen()
     basic.pause(randint(30, 100) * 100)
-    game_started = True
     if P1Cheated and P2Cheated:
         show("C")
     elif P1Cheated:
@@ -19,26 +22,29 @@ def main():
     elif P2Cheated:
         show("A")
     else:
+        game_started = True
         basic.show_icon(IconNames.YES, 0)
         music.play_tone(Note.C, 1500)
 control.in_background(main)
 
 def PressedP1():
-    global game_started, P1Cheated, P2Cheated
+    global game_started, P1Cheated, P1W, P2W
     if game_started:
-        #dodělat remízu a lock
-        basic.show_number(1, 0)
-        new_game()
+        if P2W == False:
+            P1W = True
+            basic.show_number(1, 0)
+            new_game()
     else:
         P1Cheated = True
 input.on_pin_pressed(TouchPin.P1, PressedP1)
 
 def PressedP2():
-    global game_started, P1Cheated, P2Cheated
+    global game_started, P2Cheated, P1W, P2W
     if game_started:
-        #dodělat remízu a lock
-        basic.show_number(2, 0)
-        new_game()
+        if P1W == False:
+            P2W = True
+            basic.show_number(2, 0)
+            new_game()
     else:
         P2Cheated = True
 input.on_pin_pressed(TouchPin.P2, PressedP2)
