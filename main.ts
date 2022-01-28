@@ -1,3 +1,4 @@
+// Uděláno pro kapacitní režim pinů
 pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
 pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
 let game_started = false

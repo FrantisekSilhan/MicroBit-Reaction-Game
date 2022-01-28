@@ -1,3 +1,4 @@
+#Uděláno pro kapacitní režim pinů
 pins.touch_set_mode(TouchTarget.P1, TouchTargetMode.CAPACITIVE)
 pins.touch_set_mode(TouchTarget.P2, TouchTargetMode.CAPACITIVE)
 
