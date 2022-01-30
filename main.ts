@@ -34,10 +34,14 @@ function check() {
         if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P2) == 1) {
             basic.showString("R", 0)
             game_started = false
-        } else if (pins.digitalReadPin(DigitalPin.P1) == 1) {
+        }
+        
+        if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P2) == 0) {
             basic.showNumber(1, 0)
             game_started = false
-        } else if (pins.digitalReadPin(DigitalPin.P2) == 1) {
+        }
+        
+        if (pins.digitalReadPin(DigitalPin.P2) == 1 && pins.digitalReadPin(DigitalPin.P1) == 0) {
             basic.showNumber(2, 0)
             game_started = false
         }

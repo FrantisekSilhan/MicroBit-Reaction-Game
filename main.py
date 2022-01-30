@@ -30,10 +30,10 @@ def check():
         if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 1:
             basic.show_string("R", 0)
             game_started = False
-        elif pins.digitalReadPin(DigitalPin.P1) == 1:
+        if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 0:
             basic.show_number(1, 0)
             game_started = False
-        elif pins.digitalReadPin(DigitalPin.P2) == 1:
+        if pins.digitalReadPin(DigitalPin.P2) == 1 and pins.digitalReadPin(DigitalPin.P1) == 0:
             basic.show_number(2, 0)
             game_started = False
         new_game()
