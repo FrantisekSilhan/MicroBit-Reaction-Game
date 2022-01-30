@@ -1,18 +1,16 @@
-// Uděláno pro kapacitní režim pinů
-pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
-pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
 let game_started = false
 let P1Cheated = false
 let P2Cheated = false
-let P1Won = false
-let P2Won = false
+// P1Won = False
+// P2Won = False
 function main() {
     
+    // , P1Won, P2Won
     P1Cheated = false
     P2Cheated = false
     game_started = false
-    P1Won = false
-    P2Won = false
+    // P1Won = False
+    // P2Won = False
     basic.clearScreen()
     basic.pause(randint(30, 100) * 100)
     if (P1Cheated && P2Cheated) {
@@ -30,34 +28,57 @@ function main() {
 }
 
 control.inBackground(main)
-input.onPinPressed(TouchPin.P1, function PressedP1() {
+function check() {
     
     if (game_started) {
-        if (P2Won == false) {
-            P1Won = true
+        if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P2) == 1) {
+            basic.showString("R", 0)
+            game_started = false
+        } else if (pins.digitalReadPin(DigitalPin.P1) == 1) {
             basic.showNumber(1, 0)
-            new_game()
-        }
-        
-    } else {
-        P1Cheated = true
-    }
-    
-})
-input.onPinPressed(TouchPin.P2, function PressedP2() {
-    
-    if (game_started) {
-        if (P1Won == false) {
-            P2Won = true
+            game_started = false
+        } else if (pins.digitalReadPin(DigitalPin.P2) == 1) {
             basic.showNumber(2, 0)
-            new_game()
+            game_started = false
         }
         
+        new_game()
     } else {
-        P2Cheated = true
+        if (pins.digitalReadPin(DigitalPin.P1) == 1) {
+            P1Cheated = true
+        }
+        
+        if (pins.digitalReadPin(DigitalPin.P2) == 1) {
+            P2Cheated = true
+        }
+        
     }
     
-})
+}
+
+input.onPinPressed(TouchPin.P1, check)
+input.onPinPressed(TouchPin.P2, check)
+// def PressedP1():
+//     global game_started, P1Cheated, P1Won, P2Won
+//     if game_started:
+//         if P2Won == False:
+//             P1Won = True
+//             basic.show_number(1, 0)
+//             new_game()
+//     else:
+//         P1Cheated = True
+// input.on_pin_pressed(TouchPin.P1, PressedP1)
+// 
+// def PressedP2():
+//     global game_started, P2Cheated, P1Won, P2Won
+//     if game_started:
+//         if P1Won == False:
+//             P2Won = True
+//             basic.show_number(2, 0)
+//             new_game()
+//     else:
+//         P2Cheated = True
+// input.on_pin_pressed(TouchPin.P2, PressedP2)
 function new_game() {
     basic.pause(3000)
     main()
