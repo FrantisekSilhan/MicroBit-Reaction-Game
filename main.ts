@@ -23,26 +23,30 @@ function main() {
 }
 
 control.inBackground(main)
-function check() {
+basic.forever(function check() {
     
     if (game_started) {
         if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P2) == 1) {
             basic.showString("R", 0)
             game_started = false
+            basic.pause(3000)
+            main()
         }
         
         if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P2) == 0) {
             basic.showNumber(1, 0)
             game_started = false
+            basic.pause(3000)
+            main()
         }
         
         if (pins.digitalReadPin(DigitalPin.P2) == 1 && pins.digitalReadPin(DigitalPin.P1) == 0) {
             basic.showNumber(2, 0)
             game_started = false
+            basic.pause(3000)
+            main()
         }
         
-        basic.pause(3000)
-        main()
     } else {
         if (pins.digitalReadPin(DigitalPin.P1) == 1) {
             P1Cheated = true
@@ -54,10 +58,7 @@ function check() {
         
     }
     
-}
-
-input.onPinPressed(TouchPin.P1, check)
-input.onPinPressed(TouchPin.P2, check)
+})
 function show(value: string) {
     basic.showString(value, 0)
     music.playTone(Note.C, 1500)

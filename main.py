@@ -27,21 +27,24 @@ def check():
         if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 1:
             basic.show_string("R", 0)
             game_started = False
+            basic.pause(3000)
+            main()
         if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 0:
             basic.show_number(1, 0)
             game_started = False
+            basic.pause(3000)
+            main()
         if pins.digitalReadPin(DigitalPin.P2) == 1 and pins.digitalReadPin(DigitalPin.P1) == 0:
             basic.show_number(2, 0)
             game_started = False
-        basic.pause(3000)
-        main()
+            basic.pause(3000)
+            main()
     else:
         if pins.digitalReadPin(DigitalPin.P1) == 1:
             P1Cheated = True
         if pins.digitalReadPin(DigitalPin.P2) == 1:
             P2Cheated = True
-input.on_pin_pressed(TouchPin.P1, check)
-input.on_pin_pressed(TouchPin.P2, check)
+basic.forever(check)
 
 def show(value):
     basic.show_string(value, 0)
