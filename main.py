@@ -33,7 +33,8 @@ def check():
         if pins.digitalReadPin(DigitalPin.P2) == 1 and pins.digitalReadPin(DigitalPin.P1) == 0:
             basic.show_number(2, 0)
             game_started = False
-        new_game()
+        basic.pause(3000)
+        main()
     else:
         if pins.digitalReadPin(DigitalPin.P1) == 1:
             P1Cheated = True
@@ -42,11 +43,8 @@ def check():
 input.on_pin_pressed(TouchPin.P1, check)
 input.on_pin_pressed(TouchPin.P2, check)
 
-def new_game():
-    basic.pause(3000)
-    main()
-
 def show(value):
     basic.show_string(value, 0)
     music.play_tone(Note.C, 1500)
-    new_game()
+    basic.pause(1500)
+    main()

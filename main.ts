@@ -41,7 +41,8 @@ function check() {
             game_started = false
         }
         
-        new_game()
+        basic.pause(3000)
+        main()
     } else {
         if (pins.digitalReadPin(DigitalPin.P1) == 1) {
             P1Cheated = true
@@ -57,14 +58,10 @@ function check() {
 
 input.onPinPressed(TouchPin.P1, check)
 input.onPinPressed(TouchPin.P2, check)
-function new_game() {
-    basic.pause(3000)
-    main()
-}
-
 function show(value: string) {
     basic.showString(value, 0)
     music.playTone(Note.C, 1500)
-    new_game()
+    basic.pause(1500)
+    main()
 }
 
