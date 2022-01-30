@@ -3,7 +3,7 @@ P1Cheated = False
 P2Cheated = False
 
 def main():
-    global game_started, P1Cheated, P2Cheated#, P1Won, P2Won
+    global game_started, P1Cheated, P2Cheated
     P1Cheated = False
     P2Cheated = False
     game_started = False

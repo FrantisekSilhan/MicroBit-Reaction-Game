@@ -3,7 +3,6 @@ let P1Cheated = false
 let P2Cheated = false
 function main() {
     
-    // , P1Won, P2Won
     P1Cheated = false
     P2Cheated = false
     game_started = false
