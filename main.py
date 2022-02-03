@@ -1,25 +1,16 @@
 game_started = False
-P1Cheated = False
-P2Cheated = False
 
 def main():
-    global game_started, P1Cheated, P2Cheated
+    global game_started
     basic.clear_screen()
     basic.pause(randint(30, 100) * 100)
-    if P1Cheated and P2Cheated:
-        show("C")
-    elif P1Cheated:
-        show("B")
-    elif P2Cheated:
-        show("A")
-    else:
-        game_started = True
-        basic.show_icon(IconNames.YES, 0)
-        music.play_tone(Note.C, 1500)
+    game_started = True
+    basic.show_icon(IconNames.YES, 0)
+    music.play_tone(Note.C, 1500)
 control.in_background(main)
 
 def check():
-    global game_started, P1Cheated, P2Cheated
+    global game_started
     p1 = pins.digitalReadPin(DigitalPin.P1)
     p2 = pins.digitalReadPin(DigitalPin.P2)
     if game_started:
@@ -39,14 +30,16 @@ def check():
             basic.pause(3000)
             control.reset()
     else:
+        if p1 == 0 and p2 == 0:
+            basic.show_string("C", 0)
+            basic.pause(3000)
+            control.reset()
         if p1 == 0:
-            P1Cheated = True
+            basic.show_string("B", 0)
+            basic.pause(3000)
+            control.reset()
         if p2 == 0:
-            P2Cheated = True
+            basic.show_string("A", 0)
+            basic.pause(3000)
+            control.reset()
 basic.forever(check)
-
-def show(value):
-    basic.show_string(value, 0)
-    music.play_tone(Note.C, 1500)
-    basic.pause(1500)
-    control.reset()
