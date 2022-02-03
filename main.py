@@ -32,14 +32,17 @@ def check():
     else:
         if p1 == 0 and p2 == 0:
             basic.show_string("C", 0)
+            game_started = False
             basic.pause(3000)
             control.reset()
         if p1 == 0:
             basic.show_string("B", 0)
             basic.pause(3000)
+            game_started = False
             control.reset()
         if p2 == 0:
             basic.show_string("A", 0)
             basic.pause(3000)
+            game_started = False
             control.reset()
 basic.forever(check)
