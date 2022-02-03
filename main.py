@@ -4,9 +4,6 @@ P2Cheated = False
 
 def main():
     global game_started, P1Cheated, P2Cheated
-    P1Cheated = False
-    P2Cheated = False
-    game_started = False
     basic.clear_screen()
     basic.pause(randint(30, 100) * 100)
     if P1Cheated and P2Cheated:
@@ -23,26 +20,28 @@ control.in_background(main)
 
 def check():
     global game_started, P1Cheated, P2Cheated
+    p1 = pins.digitalReadPin(DigitalPin.P1)
+    p2 = pins.digitalReadPin(DigitalPin.P2)
     if game_started:
-        if pins.digitalReadPin(DigitalPin.P1) == 0 and pins.digitalReadPin(DigitalPin.P2) == 0:
+        if p1 == 0 and p2 == 0:
             basic.show_string("R", 0)
             game_started = False
             basic.pause(3000)
-            main()
-        if pins.digitalReadPin(DigitalPin.P1) == 0 and pins.digitalReadPin(DigitalPin.P2) == 1:
+            control.reset()
+        if p1 == 0 and p2 == 1:
             basic.show_number(1, 0)
             game_started = False
             basic.pause(3000)
-            main()
-        if pins.digitalReadPin(DigitalPin.P2) == 0 and pins.digitalReadPin(DigitalPin.P1) == 1:
+            control.reset()
+        if p2 == 0 and p1 == 1:
             basic.show_number(2, 0)
             game_started = False
             basic.pause(3000)
-            main()
+            control.reset()
     else:
-        if pins.digitalReadPin(DigitalPin.P1) == 0:
+        if p1 == 0:
             P1Cheated = True
-        if pins.digitalReadPin(DigitalPin.P2) == 0:
+        if p2 == 0:
             P2Cheated = True
 basic.forever(check)
 
@@ -50,4 +49,4 @@ def show(value):
     basic.show_string(value, 0)
     music.play_tone(Note.C, 1500)
     basic.pause(1500)
-    main()
+    control.reset()
