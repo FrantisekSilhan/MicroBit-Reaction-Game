@@ -28,12 +28,12 @@ def check():
             game_started = False
             basic.pause(3000)
             control.reset()
-        if p1 == 0 and p2 == 1:
+        elif p1 == 0 and p2 == 1:
             basic.show_number(1, 0)
             game_started = False
             basic.pause(3000)
             control.reset()
-        if p2 == 0 and p1 == 1:
+        elif p2 == 0 and p1 == 1:
             basic.show_number(2, 0)
             game_started = False
             basic.pause(3000)
