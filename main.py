@@ -24,25 +24,25 @@ control.in_background(main)
 def check():
     global game_started, P1Cheated, P2Cheated
     if game_started:
-        if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 1:
+        if pins.digitalReadPin(DigitalPin.P1) == 0 and pins.digitalReadPin(DigitalPin.P2) == 0:
             basic.show_string("R", 0)
             game_started = False
             basic.pause(3000)
             main()
-        if pins.digitalReadPin(DigitalPin.P1) == 1 and pins.digitalReadPin(DigitalPin.P2) == 0:
+        if pins.digitalReadPin(DigitalPin.P1) == 0 and pins.digitalReadPin(DigitalPin.P2) == 1:
             basic.show_number(1, 0)
             game_started = False
             basic.pause(3000)
             main()
-        if pins.digitalReadPin(DigitalPin.P2) == 1 and pins.digitalReadPin(DigitalPin.P1) == 0:
+        if pins.digitalReadPin(DigitalPin.P2) == 0 and pins.digitalReadPin(DigitalPin.P1) == 1:
             basic.show_number(2, 0)
             game_started = False
             basic.pause(3000)
             main()
     else:
-        if pins.digitalReadPin(DigitalPin.P1) == 1:
+        if pins.digitalReadPin(DigitalPin.P1) == 0:
             P1Cheated = True
-        if pins.digitalReadPin(DigitalPin.P2) == 1:
+        if pins.digitalReadPin(DigitalPin.P2) == 0:
             P2Cheated = True
 basic.forever(check)
 
