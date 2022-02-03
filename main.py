@@ -1,16 +1,18 @@
 game_started = False
+Cheated = False
 
 def main():
-    global game_started
+    global game_started, Cheated
     basic.clear_screen()
     basic.pause(randint(30, 100) * 100)
-    game_started = True
-    basic.show_icon(IconNames.YES, 0)
-    music.play_tone(Note.C, 1500)
+    if Cheated == False:
+        game_started = True
+        basic.show_icon(IconNames.YES, 0)
+        music.play_tone(Note.C, 1500)
 control.in_background(main)
 
 def check():
-    global game_started
+    global game_started, Cheated
     p1 = pins.digitalReadPin(DigitalPin.P1)
     p2 = pins.digitalReadPin(DigitalPin.P2)
     if game_started:
@@ -30,6 +32,7 @@ def check():
             basic.pause(3000)
             control.reset()
     else:
+        cheated = True
         if p1 == 0 and p2 == 0:
             basic.show_string("C", 0)
             game_started = False
